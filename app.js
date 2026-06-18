@@ -61,4 +61,13 @@ function playRound (humanChoice, computerChoice) {
     }
 }
 
-console.log(playRound(getHumanChoice(), getComputerChoice()));
+while (humanScore < 5 && computerScore < 5) {
+    console.log(playRound(getHumanChoice(), getComputerChoice()));
+    console.log(`Current score - Player: ${humanScore} Computer: ${computerScore}`);
+}
+
+if (humanScore === 5) {
+    console.log("Congratulations! You won the game!");
+} else {
+    console.log("Sorry, you lost the game. Better luck next time!");
+}

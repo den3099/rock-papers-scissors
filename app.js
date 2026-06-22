@@ -78,8 +78,8 @@ function getComputerChoice () {
 }
 
 
-function playRound (humanChoice, computerChoice) {
-    switch (humanChoice) {
+function playRound (playerChoice, computerChoice) {
+    switch (playerChoice) {
         case "rock":
             if (computerChoice === "rock") {
                 return console.log("It's a tie!");

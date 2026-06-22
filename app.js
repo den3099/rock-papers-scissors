@@ -1,37 +1,44 @@
-let humanScore = 0;
+let playerScore = 0;
 let computerScore = 0;
-let humanChoice = "";
+let playerChoice = "";
 
-let playerButtons = document.querySelector("#player-choices");
+let gameSection = document.querySelector("#game-section");
 let gameButtons = document.querySelectorAll(".player-buttons");
+let playerScoreDisplay = document.querySelector("#player-score");
+let computerScoreDisplay = document.querySelector("#computer-score");
 
-playerButtons.addEventListener("click", (event) => {
+gameSection.addEventListener("click", (event) => {
     let target = event.target;
     
     switch (target.id) {
         case "start-game":
         case "reset-game":
-            humanScore = 0;
+            playerScore = 0;
             computerScore = 0;
+            scoreDisplay();
             enableButtons();
             console.log("Game started! First to 5 wins. Please select rock, paper, or scissors.");
-            console.log(`Current Score - You: ${humanScore} Computer: ${computerScore}`);
+            console.log(`Current Score - You: ${playerScore} Computer: ${computerScore}`);
             break;
         case "rock":
-            humanChoice = "rock";
+            playerChoice = "rock";
             scoreCounter();
+            scoreDisplay();
             break;
         case "paper":
-            humanChoice = "paper";
+            playerChoice = "paper";
             scoreCounter();
+            scoreDisplay();
             break;
         case "scissors":
-            humanChoice = "scissors";
+            playerChoice = "scissors";
             scoreCounter();
+            scoreDisplay();
             break;
         default:
-            humanScore = 0;
+            playerScore = 0;
             computerScore = 0;
+            scoreDisplay();
             break;
     }
     console.log(`\n`);
@@ -48,6 +55,11 @@ function disableButtons () {
         button.disabled = true;
     });
 };
+
+function scoreDisplay () {
+    playerScoreDisplay.textContent = playerScore;
+    computerScoreDisplay.textContent = computerScore;
+}
 
 function getComputerChoice () {
     let computerChoice = Math.floor(Math.random() * 3);
@@ -75,12 +87,12 @@ function playRound (humanChoice, computerChoice) {
                 computerScore++;
                 return console.log("You lose! Paper beats rock.");
             } else {
-                humanScore++;   
+                playerScore++;   
                 return console.log("You win! Rock beats scissors.");
             }
         case "paper":
             if (computerChoice === "rock") {
-                humanScore++;
+                playerScore++;
                 return console.log("You win! Paper beats rock.");
             } else if (computerChoice === "paper") {
                 return console.log("It's a tie!");
@@ -93,7 +105,7 @@ function playRound (humanChoice, computerChoice) {
                 computerScore++;
                 return console.log("You lose! Rock beats scissors.");
             } else if (computerChoice === "paper") {
-                humanScore++;
+                playerScore++;
                 return console.log("You win! Scissors beats paper.");
             } else {
                 return console.log("It's a tie!");
@@ -105,8 +117,8 @@ function playRound (humanChoice, computerChoice) {
 
 
 function scoreCounter () {
-    playRound(humanChoice, getComputerChoice());
-    if (humanScore === 5) {
+    playRound(playerChoice, getComputerChoice());
+    if (playerScore === 5) {
         console.log("Congratulations! You won the game!");
         scoreReset();
         disableButtons();
@@ -115,12 +127,12 @@ function scoreCounter () {
         scoreReset();
         disableButtons();
     } else {
-        console.log(`Current Score - You: ${humanScore} Computer: ${computerScore}`);
+        console.log(`Current Score - You: ${playerScore} Computer: ${computerScore}`);
     };
 };
 
 
 function scoreReset () {
-    humanScore = 0;
+    playerScore = 0;
     computerScore = 0;
 };

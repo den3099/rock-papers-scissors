@@ -16,8 +16,10 @@ gameSection.addEventListener("click", (event) => {
     switch (target.id) {
         case "start-game":
         case "reset-game":
-            playerScore = 0;
-            computerScore = 0;
+            scoreReset();
+            playerChoiceDisplay.textContent = "-";
+            computerChoiceDisplay.textContent = "-";
+            roundResultDisplay.textContent = "Result will appear here";
             scoreDisplay();
             enableButtons();
             console.log("Game started! First to 5 wins. Please select rock, paper, or scissors.");
@@ -123,11 +125,11 @@ function playRound (playerChoice, computerChoice) {
 function scoreCounter () {
     roundResultDisplay.textContent = playRound(playerChoice, getComputerChoice());
     if (playerScore === 5) {
-        console.log("Congratulations! You won the game!");
+        roundResultDisplay.textContent = "Congratulations! You won the game!";
         scoreReset();
         disableButtons();
     } else if (computerScore === 5) {
-        console.log("Sorry, you lost the game. Better luck next time!");
+        roundResultDisplay.textContent = "Sorry, you lost the game. Better luck next time!";
         scoreReset();
         disableButtons();
     } else {

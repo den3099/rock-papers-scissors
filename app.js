@@ -3,7 +3,7 @@ let computerScore = 0;
 let humanChoice = "";
 
 let playerButtons = document.querySelector("#player-choices");
-
+let gameButtons = document.querySelectorAll(".player-buttons");
 
 playerButtons.addEventListener("click", (event) => {
     let target = event.target;
@@ -13,6 +13,7 @@ playerButtons.addEventListener("click", (event) => {
         case "reset-game":
             humanScore = 0;
             computerScore = 0;
+            enableButtons();
             console.log("Game started! First to 5 wins. Please select rock, paper, or scissors.");
             console.log(`Current Score - You: ${humanScore} Computer: ${computerScore}`);
             break;
@@ -36,6 +37,17 @@ playerButtons.addEventListener("click", (event) => {
     console.log(`\n`);
 });
 
+function enableButtons () {
+    gameButtons.forEach(button => {
+        button.disabled = false;
+    });
+};
+
+function disableButtons () {
+    gameButtons.forEach(button => {
+        button.disabled = true;
+    });
+};
 
 function getComputerChoice () {
     let computerChoice = Math.floor(Math.random() * 3);
@@ -97,9 +109,11 @@ function scoreCounter () {
     if (humanScore === 5) {
         console.log("Congratulations! You won the game!");
         scoreReset();
+        disableButtons();
     } else if (computerScore === 5) {
         console.log("Sorry, you lost the game. Better luck next time!");
         scoreReset();
+        disableButtons();
     } else {
         console.log(`Current Score - You: ${humanScore} Computer: ${computerScore}`);
     };
